@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>ROL•LINE</title>
-  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=VT323&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -12,135 +12,197 @@
     }
 
     body {
-      background-color: #0d0d0d;
+      background: #0a0a0a;
       color: #f2f2f2;
       font-family: 'DM Sans', sans-serif;
       overflow-x: hidden;
-      padding: 30px;
+      padding: 40px 20px;
+      position: relative;
     }
 
-    /* --- GLITCH HEADER --- */
+    /* === PARTICLE BACKGROUND === */
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.02) 1px, transparent 1px);
+      background-size: 40px 40px;
+      animation: pulseDots 10s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes pulseDots {
+      0% { background-position: 0 0; }
+      100% { background-position: 40px 40px; }
+    }
+
+    /* === GLITCH TITLE === */
     .glitch {
       font-family: 'VT323', monospace;
-      font-size: 5em;
-      color: #fff;
-      position: relative;
+      font-size: 6em;
       text-align: center;
-      animation: glitch 2s infinite;
-      cursor: pointer;
-      transition: transform 0.3s ease;
+      position: relative;
+      color: #fff;
+      animation: glitch 3s infinite;
+      line-height: 1;
+      margin-bottom: 30px;
     }
 
-    .glitch:hover {
-      transform: scale(1.05);
+    .glitch::before,
+    .glitch::after {
+      content: attr(data-text);
+      position: absolute;
+      left: 0;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .glitch::before {
+      animation: glitchTop 1.5s infinite linear;
+      color: #ff00c8;
+    }
+
+    .glitch::after {
+      animation: glitchBottom 1.5s infinite linear;
+      color: #00fff2;
     }
 
     @keyframes glitch {
-      0% {text-shadow: 2px 2px #ff00c8, -2px -2px #00fff2;}
-      20% {text-shadow: -2px 2px #ff00c8, 2px -2px #00fff2;}
-      40% {text-shadow: 2px -2px #ff00c8, -2px 2px #00fff2;}
-      60% {text-shadow: -2px -2px #ff00c8, 2px 2px #00fff2;}
-      80% {text-shadow: 2px 2px #ff00c8, -2px -2px #00fff2;}
-      100% {text-shadow: -2px 2px #ff00c8, 2px -2px #00fff2;}
+      0%, 100% { transform: translate(0); }
+      20% { transform: translate(2px, -2px); }
+      40% { transform: translate(-2px, 2px); }
+      60% { transform: translate(1px, 1px); }
+      80% { transform: translate(-1px, -1px); }
     }
 
-    /* --- ABOUT ME PIXEL BOX --- */
+    @keyframes glitchTop {
+      0% { clip-path: inset(0 0 90% 0); transform: translate(-1px, -1px);}
+      100% { clip-path: inset(0 0 10% 0); transform: translate(1px, 1px);}
+    }
+
+    @keyframes glitchBottom {
+      0% { clip-path: inset(90% 0 0 0); transform: translate(1px, 1px);}
+      100% { clip-path: inset(10% 0 0 0); transform: translate(-1px, -1px);}
+    }
+
+    /* === ABOUT ME CARD === */
     .about-box {
-      margin: 40px auto;
-      padding: 20px;
-      background: #1a1a1a;
-      border: 3px solid #777;
+      background: linear-gradient(145deg, #151515, #1c1c1c);
+      border: 2px solid #2e2e2e;
+      box-shadow: 0 0 15px #ffb3ec1f;
+      padding: 20px 25px;
+      max-width: 700px;
+      margin: 30px auto;
+      border-radius: 16px;
       font-family: 'VT323', monospace;
       font-size: 1.5em;
-      max-width: 600px;
-      text-align: center;
-      animation: fadeIn 1.5s ease-in;
+      line-height: 1.6;
+      transition: transform 0.3s;
+      animation: floatCard 6s ease-in-out infinite;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(30px);}
-      to {opacity: 1; transform: translateY(0);}
+    @keyframes floatCard {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
     }
 
-    /* --- LORE DROPDOWN --- */
+    /* === LORE DROPDOWN === */
     details {
-      margin: 30px auto;
-      max-width: 600px;
-      background: #1a1a1a;
+      max-width: 700px;
+      margin: 40px auto;
       padding: 20px;
-      border-radius: 8px;
-      border: 2px dashed #666;
-      transition: all 0.4s ease;
+      border: 2px dashed #444;
+      border-radius: 12px;
+      background: #151515;
+      transition: 0.3s;
     }
 
     summary {
-      font-size: 1.4em;
+      font-size: 1.5em;
+      color: #ffd6f6;
       cursor: pointer;
-      color: #a8e0ff;
-      font-weight: bold;
-      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      margin-bottom: 10px;
     }
 
     details[open] {
-      background-color: #262626;
+      background: #1c1c1c;
+      border-color: #a8e0ff;
     }
 
-    /* --- SLIDESHOW --- */
+    details p {
+      margin-top: 15px;
+      line-height: 1.7;
+    }
+
+    /* === SLIDESHOW === */
     .slideshow-container {
-      max-width: 1000px;
-      margin: 50px auto;
-      position: relative;
+      max-width: 90%;
+      margin: 60px auto;
       overflow: hidden;
+      position: relative;
     }
 
     .slide-track {
       display: flex;
-      animation: scroll 30s linear infinite;
       gap: 20px;
+      animation: scroll 40s linear infinite;
     }
 
     .slide {
       min-width: 300px;
-      height: 180px;
+      height: 200px;
       border-radius: 10px;
-      background-color: #1e1e1e;
       overflow: hidden;
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
-      transition: transform 0.3s;
+      box-shadow: 0 0 10px #ffc0cb44;
+      position: relative;
     }
 
     .slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
-    }
-
-    .slide:hover {
-      transform: scale(1.05);
+      filter: contrast(110%) saturate(120%);
     }
 
     @keyframes scroll {
       0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
+
+    /* === FOOTER === */
+    footer {
+      margin-top: 100px;
+      text-align: center;
+      font-family: 'VT323', monospace;
+      color: #666;
+      font-size: 1em;
+      opacity: 0.5;
+    }
+
+    footer:hover {
+      opacity: 1;
+      color: #a8e0ff;
+      text-shadow: 0 0 5px #ffc0cb;
+    }
   </style>
 </head>
 <body>
 
-  <!-- GLITCH HEADER -->
-  <h1 class="glitch">ROL•LINE</h1>
+  <!-- HEADER GLITCH -->
+  <div class="glitch" data-text="ROL•LINE">ROL•LINE</div>
 
-  <!-- ABOUT ME -->
+  <!-- ABOUT BOX -->
   <div class="about-box">
-    <p>I write, sometimes too much. I build universes stitched from filth, softness, and secret violence. This is my label, not my brand. Change this text later.</p>
+    <p>I write, sometimes too much. I build universes stitched from filth, softness, and secret violence. This is my label, not my brand. I am not the product, you are. (Change this text later.)</p>
   </div>
 
   <!-- LORE DROPDOWN -->
   <details>
     <summary>✦ A Bit About My Lore</summary>
     <p>
-      My worlds are ruled by fractured gods and dysfunctional machines. CASTE and ORACLE are at war. The Dead Dog Motel never sleeps. You are welcome, but never safe.  
+      Inside ROL•LINE lives the Starfall Dynasty, the eternal tension of CASTE vs ORACLE, and the cruel hospitality of the Dead Dog Motel. My characters are flawed, dramatic, and often dangerous. The world is too loud for them — so they retreat into narrative violence.
     </p>
   </details>
 
@@ -149,28 +211,33 @@
     <div class="slide-track">
       <!-- Slide 1 -->
       <a class="slide" href="https://janitor.ai/chatbot1" target="_blank">
-        <img src="https://via.placeholder.com/300x180/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
+        <img src="https://via.placeholder.com/300x200/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
       </a>
       <!-- Slide 2 -->
       <a class="slide" href="https://janitor.ai/chatbot2" target="_blank">
-        <img src="https://via.placeholder.com/300x180/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
+        <img src="https://via.placeholder.com/300x200/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
       </a>
       <!-- Slide 3 -->
       <a class="slide" href="https://janitor.ai/chatbot3" target="_blank">
-        <img src="https://via.placeholder.com/300x180/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
+        <img src="https://via.placeholder.com/300x200/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
       </a>
-      <!-- Duplicate to loop -->
+      <!-- Repeat to loop seamlessly -->
       <a class="slide" href="https://janitor.ai/chatbot1" target="_blank">
-        <img src="https://via.placeholder.com/300x180/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
+        <img src="https://via.placeholder.com/300x200/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
       </a>
       <a class="slide" href="https://janitor.ai/chatbot2" target="_blank">
-        <img src="https://via.placeholder.com/300x180/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
+        <img src="https://via.placeholder.com/300x200/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
       </a>
       <a class="slide" href="https://janitor.ai/chatbot3" target="_blank">
-        <img src="https://via.placeholder.com/300x180/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
+        <img src="https://via.placeholder.com/300x200/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
       </a>
     </div>
   </div>
+
+  <!-- FOOTER -->
+  <footer>
+    © ROL•LINE | born from glitch, loved by filth ✦
+  </footer>
 
 </body>
 </html>
