@@ -2,34 +2,175 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>My Aesthetic Site</title>
+  <title>ROL•LINE</title>
+  <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
   <style>
-    body {
+    * {
       margin: 0;
-      font-family: 'DM Sans', sans-serif;
-      background: #121212;
-      color: #f7f1ff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      animation: fadeIn 2s ease-out;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    h1 {
-      background: linear-gradient(135deg, #e0b3ff, #a8e0ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-size: 3em;
+    body {
+      background-color: #0d0d0d;
+      color: #f2f2f2;
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      padding: 30px;
+    }
+
+    /* --- GLITCH HEADER --- */
+    .glitch {
+      font-family: 'VT323', monospace;
+      font-size: 5em;
+      color: #fff;
+      position: relative;
+      text-align: center;
+      animation: glitch 2s infinite;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .glitch:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes glitch {
+      0% {text-shadow: 2px 2px #ff00c8, -2px -2px #00fff2;}
+      20% {text-shadow: -2px 2px #ff00c8, 2px -2px #00fff2;}
+      40% {text-shadow: 2px -2px #ff00c8, -2px 2px #00fff2;}
+      60% {text-shadow: -2px -2px #ff00c8, 2px 2px #00fff2;}
+      80% {text-shadow: 2px 2px #ff00c8, -2px -2px #00fff2;}
+      100% {text-shadow: -2px 2px #ff00c8, 2px -2px #00fff2;}
+    }
+
+    /* --- ABOUT ME PIXEL BOX --- */
+    .about-box {
+      margin: 40px auto;
+      padding: 20px;
+      background: #1a1a1a;
+      border: 3px solid #777;
+      font-family: 'VT323', monospace;
+      font-size: 1.5em;
+      max-width: 600px;
+      text-align: center;
+      animation: fadeIn 1.5s ease-in;
     }
 
     @keyframes fadeIn {
-      0% {opacity: 0; transform: translateY(20px);}
-      100% {opacity: 1; transform: translateY(0);}
+      from {opacity: 0; transform: translateY(30px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    /* --- LORE DROPDOWN --- */
+    details {
+      margin: 30px auto;
+      max-width: 600px;
+      background: #1a1a1a;
+      padding: 20px;
+      border-radius: 8px;
+      border: 2px dashed #666;
+      transition: all 0.4s ease;
+    }
+
+    summary {
+      font-size: 1.4em;
+      cursor: pointer;
+      color: #a8e0ff;
+      font-weight: bold;
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    details[open] {
+      background-color: #262626;
+    }
+
+    /* --- SLIDESHOW --- */
+    .slideshow-container {
+      max-width: 1000px;
+      margin: 50px auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .slide-track {
+      display: flex;
+      animation: scroll 30s linear infinite;
+      gap: 20px;
+    }
+
+    .slide {
+      min-width: 300px;
+      height: 180px;
+      border-radius: 10px;
+      background-color: #1e1e1e;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+      transition: transform 0.3s;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide:hover {
+      transform: scale(1.05);
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
     }
   </style>
 </head>
 <body>
-  <h1>Welcome to My World</h1>
+
+  <!-- GLITCH HEADER -->
+  <h1 class="glitch">ROL•LINE</h1>
+
+  <!-- ABOUT ME -->
+  <div class="about-box">
+    <p>I write, sometimes too much. I build universes stitched from filth, softness, and secret violence. This is my label, not my brand. Change this text later.</p>
+  </div>
+
+  <!-- LORE DROPDOWN -->
+  <details>
+    <summary>✦ A Bit About My Lore</summary>
+    <p>
+      My worlds are ruled by fractured gods and dysfunctional machines. CASTE and ORACLE are at war. The Dead Dog Motel never sleeps. You are welcome, but never safe.  
+    </p>
+  </details>
+
+  <!-- CHATBOT SLIDES -->
+  <div class="slideshow-container">
+    <div class="slide-track">
+      <!-- Slide 1 -->
+      <a class="slide" href="https://janitor.ai/chatbot1" target="_blank">
+        <img src="https://via.placeholder.com/300x180/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
+      </a>
+      <!-- Slide 2 -->
+      <a class="slide" href="https://janitor.ai/chatbot2" target="_blank">
+        <img src="https://via.placeholder.com/300x180/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
+      </a>
+      <!-- Slide 3 -->
+      <a class="slide" href="https://janitor.ai/chatbot3" target="_blank">
+        <img src="https://via.placeholder.com/300x180/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
+      </a>
+      <!-- Duplicate to loop -->
+      <a class="slide" href="https://janitor.ai/chatbot1" target="_blank">
+        <img src="https://via.placeholder.com/300x180/ffc0cb/0d0d0d?text=Bot+1" alt="Bot 1">
+      </a>
+      <a class="slide" href="https://janitor.ai/chatbot2" target="_blank">
+        <img src="https://via.placeholder.com/300x180/a8e0ff/0d0d0d?text=Bot+2" alt="Bot 2">
+      </a>
+      <a class="slide" href="https://janitor.ai/chatbot3" target="_blank">
+        <img src="https://via.placeholder.com/300x180/e0b3ff/0d0d0d?text=Bot+3" alt="Bot 3">
+      </a>
+    </div>
+  </div>
+
 </body>
 </html>
